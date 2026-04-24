@@ -45,7 +45,9 @@ Import-Module .\PSNmapLight\PSNmapLight.psm1
 Or run directly:
 
 .\Invoke-NmapLight.ps1
-🔧 Usage
+
+# 🔧 Usage
+
 Basic scan
 Invoke-NmapLight -Target 192.168.1.10 -Profile Balanced
 Subnet scan
@@ -55,25 +57,29 @@ Invoke-NmapLight -Target 192.168.1.10 -Profile Audit
 Stealth scan (low noise)
 Invoke-NmapLight -Target 192.168.1.10 -Profile Stealth
 
-📊 Output example
+# 📊 Output example
+
 OPEN 192.168.1.10:22 [SSH] OpenSSH
 OPEN 192.168.1.10:80 [HTTP] nginx
 OPEN 192.168.1.10:443 [HTTP] Apache
 
-📁 Export results
+# 📁 Export results
+
 JSON (SOC / SIEM ingestion)
 Invoke-NmapLight -Target 192.168.1.0/24 -Profile Balanced -ExportPath results.json -Format JSON
 CSV
 Invoke-NmapLight -Target 192.168.1.0/24 -Profile Balanced -ExportPath results.csv -Format CSV
 
-🧠 Scan Profiles
+# 🧠 Scan Profiles
+
 Profile	Description
 Fast	Minimal ports, quick scan
 Balanced	Default enterprise-safe scan
 Stealth	Slow, low-noise scanning
 Audit	Deep scan (1–1024 ports)
 
-🔌 Plugin System
+#🔌 Plugin System
+
 PSNmapLight supports simple service detection plugins.
 
 Each plugin:
@@ -88,7 +94,7 @@ returns a structured object:
 If no plugin matches, the result defaults to:
 OPEN / Unknown
 
-🏗 Architecture
+# 🏗 Architecture
 
 Current design:
 
@@ -104,32 +110,36 @@ reliability over extreme concurrency
 completeness over aggressive parallelism
 predictability for SOC use cases
 
-📈 Performance Notes
+# 📈 Performance Notes
+
 Optimized for accuracy and stability
 No dropped ports due to concurrency issues
 Suitable for enterprise internal networks
 Can scale to /24 networks reliably
 
-🔐 Security Considerations
+# 🔐 Security Considerations
+
 Does not require admin rights (except where network policies restrict TCP)
 No packet injection (TCP connect only)
 Safe for defensive scanning environments
 May trigger IDS/EDR alerts depending on profile
 
-🧪 Example SOC use cases
+# 🧪 Example SOC use cases
+
 Asset discovery validation
 Shadow IT detection
 Exposure checks before audits
 Rapid port validation during incident response
 
-📌 Roadmap (optional future enhancements)
+# 📌 Roadmap (optional future enhancements)
+
 Advanced banner fingerprinting
 TLS certificate inspection plugin
 HTTP header deep analysis
 Confidence scoring per service
 Nmap-compatible output format
 
-👤 Author
+# 👤 Author
 
 Created as part of a PowerShell security tooling set:
 “Random PowerShell scripts to make your life easier”
