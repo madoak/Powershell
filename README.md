@@ -96,6 +96,149 @@ RDP is now configured to use the certificate with thumbprint: XXXXX
 ```
 
 ---
+### 🔍 Stealth Port Scanner (SOC-style)
+
+#### `PS_portscan_stealth_SOC_report.ps1`
+
+High-performance TCP port scanner designed for internal diagnostics and security validation.
+
+---
+
+### ⚙️ Features
+
+* Scans full TCP port range (1–65535)
+* Parallel threaded execution
+* Stealth timing jitter to reduce detection noise
+* Structured SOC-style output
+* Unique scan ID per execution
+* Timestamped results
+
+---
+
+### ▶️ Usage
+
+#### Show help
+
+```powershell id="help1"
+.\PS_portscan_stealth_SOC_report.ps1 -Help
+```
+
+#### Run scan
+
+```powershell id="scan1"
+.\PS_portscan_stealth_SOC_report.ps1 -Hostname "server.local"
+```
+
+---
+
+### 📊 Output Example
+
+```json id="out1"
+{
+  "ScanId": "b3c1f5e2-xxxx-xxxx-xxxx-xxxxxxxx",
+  "Timestamp": "2026-04-24T12:00:00Z",
+  "Host": "server.local",
+  "Port": 443,
+  "Protocol": "TCP",
+  "State": "Open",
+  "Scanner": "Internal-Stealth-TCP",
+  "Confidence": "High"
+}
+```
+
+---
+
+### ⚠️ Requirements
+
+* PowerShell 5.1+ (ThreadJob module required)
+
+```powershell id="req1"
+Install-Module ThreadJob -Force
+```
+
+* Administrative rights may improve network accuracy
+
+---
+
+### 🧠 Notes
+
+* Designed for **internal network diagnostics only**
+* High-speed scanning may trigger IDS/EDR alerts
+* Use responsibly in authorized environments only
+
+---
+
+### 🔎 Basic TCP Port Scanner
+
+#### `PS_portscan.ps1`
+
+Lightweight parallel TCP port scanner for quick host inspection.
+
+---
+
+### ⚙️ Features
+
+* Scans full port range (1–65535)
+* Parallel ThreadJob execution
+* Configurable timeout
+* Clean open-port output
+* Simple CLI usage
+
+---
+
+### ▶️ Usage
+
+#### Show help
+
+```powershell id="help2"
+.\PS_portscan.ps1 -Help
+```
+
+#### Run scan
+
+```powershell id="run2"
+.\PS_portscan.ps1 -Hostname "hostname.example.local"
+```
+
+---
+
+### 📊 Output Example
+
+```
+✅ Port 22 OPEN
+✅ Port 80 OPEN
+✅ Port 443 OPEN
+```
+
+---
+
+### ⚙️ Parameters
+
+| Parameter   | Description               |
+| ----------- | ------------------------- |
+| `-Hostname` | Target host to scan       |
+| `-Help`     | Displays help information |
+
+---
+
+### ⚠️ Requirements
+
+* PowerShell 5.1+
+* ThreadJob module
+
+```powershell id="req2"
+Install-Module ThreadJob -Force
+```
+
+---
+
+### 🧠 Notes
+
+* High concurrency scanning may trigger network monitoring alerts
+* Use only in authorized environments
+* Designed for internal diagnostics and troubleshooting
+
+---
 
 ## 🚀 Getting Started
 
