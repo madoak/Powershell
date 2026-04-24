@@ -14,15 +14,86 @@ The goal is simple:
 
 ## 📂 Contents
 
-Scripts in this repository may include:
+### 🧾 Hosts File Management
 
-* System administration utilities
-* Network and configuration helpers
-* File and data processing scripts
-* Security and compliance helpers
-* Automation tools for common tasks
+#### `update_hostfile.ps1`
 
-Each script is self-contained and documented where needed.
+Manages Windows hosts file entries.
+
+**Features:**
+
+* Add hostname → IP mappings
+* Remove existing entries
+* Prevent duplicates
+* Built-in help support
+
+**Usage:**
+
+```powershell id="k9h2pw"
+.\update_hostfile.ps1 -Help
+.\update_hostfile.ps1 -Action Add -Hostname "example.local" -IPAddress "127.0.0.1"
+.\update_hostfile.ps1 -Action Remove -Hostname "example.local"
+```
+
+---
+
+### 🖥️ Remote Desktop Certificate Management
+
+#### `set_rdp_certificate.ps1`
+
+Automatically configures and manages the RDP SSL certificate using a PKI template.
+
+**What it does:**
+
+* Detects the machine FQDN automatically
+* Checks for an existing RDP certificate
+* Reuses valid certificates when available
+* Replaces self-signed certificates with PKI-issued ones
+* Requests a new certificate using `RDPTemplate` if needed
+* Applies the certificate to RDP (WinStations registry key)
+
+---
+
+## 🚀 RDP Certificate Script Overview
+
+This script ensures Remote Desktop uses a **valid enterprise certificate** instead of a self-signed one.
+
+### ✔️ Key behavior
+
+* Builds FQDN from system hostname + domain
+* Searches LocalMachine RDP certificate store
+* Replaces self-signed certificates if found
+* Requests certificate from PKI (`RDPTemplate`)
+* Configures RDP to use the correct certificate thumbprint
+
+---
+
+### ▶️ Example usage
+
+Run as Administrator:
+
+```powershell id="rdp1"
+.\set_rdp_certificate.ps1
+```
+
+---
+
+### ⚠️ Requirements
+
+* Windows Server / Windows with RDP role enabled
+* PKI / AD Certificate Services available
+* Certificate template: `RDPTemplate` must exist
+* Administrative privileges required
+
+---
+
+### 🔐 Output example
+
+```
+Found an existing certificate with subject name: CN=server.domain.local
+The certificate is not self-signed. It will be used for RDP.
+RDP is now configured to use the certificate with thumbprint: XXXXX
+```
 
 ---
 
@@ -30,70 +101,36 @@ Each script is self-contained and documented where needed.
 
 ### 1. Clone the repository
 
-```bash
+```bash id="repo1"
 git clone https://github.com/madoak/Powershell.git
 cd Powershell
 ```
 
 ### 2. Run a script
 
-Make sure you run PowerShell as Administrator when required.
+Always run PowerShell as Administrator when required.
 
 Example:
 
-```powershell
+```powershell id="run1"
 .\update_hostfile.ps1 -Help
 ```
-
----
-
-## 📜 Example Script: Hosts File Updater
-
-The `update_hostfile.ps1` script allows you to manage entries in the Windows hosts file.
-
-### Features
-
-* Add hostname → IP mappings
-* Remove existing entries
-* Prevent duplicate entries
-* Built-in help support
-
-### Usage
-
-#### Show help
-
-```powershell
-.\update_hostfile.ps1 -Help
-```
-
-#### Add entry
-
-```powershell
-.\update_hostfile.ps1 -Action Add -Hostname "example.local" -IPAddress "127.0.0.1"
-```
-
-#### Remove entry
-
-```powershell
-.\update_hostfile.ps1 -Action Remove -Hostname "example.local"
-```
-
-⚠️ **Note:** This script must be run as Administrator.
 
 ---
 
 ## ⚙️ Requirements
 
 * Windows PowerShell 5.1 or PowerShell 7+
-* Appropriate permissions (some scripts require Administrator rights)
+* Administrator privileges (for system-level scripts)
+* Optional: Active Directory Certificate Services (for RDP script)
 
 ---
 
 ## 🔐 Execution Policy
 
-If scripts are blocked, temporarily allow execution:
+If scripts are blocked:
 
-```powershell
+```powershell id="policy1"
 Set-ExecutionPolicy RemoteSigned -Scope Process
 ```
 
@@ -101,12 +138,12 @@ Set-ExecutionPolicy RemoteSigned -Scope Process
 
 ## 🤝 Contributing
 
-Feel free to contribute by:
+Feel free to contribute:
 
-* Adding new useful scripts
-* Improving existing ones
-* Fixing bugs or edge cases
-* Enhancing documentation
+* Add new scripts
+* Improve existing automation
+* Fix edge cases
+* Enhance documentation
 
 ---
 
@@ -114,20 +151,19 @@ Feel free to contribute by:
 
 These scripts are:
 
-* **Simple** – easy to understand and modify
-* **Practical** – built for real use cases
-* **Reusable** – designed to be dropped into any environment
+* Simple
+* Practical
+* Reusable
+* Built for real-world admin work
 
 ---
 
 ## ⚠️ Disclaimer
 
-Use these scripts at your own risk. Always review scripts before running them in production environments.
+Use at your own risk. Always validate scripts before running in production environments.
 
 ---
 
 ## ⭐ Final Note
 
-This repo is intentionally a **grab bag of useful PowerShell tools** — not a framework, not a product, just things that make life easier.
-
-If it saves you time, it’s doing its job.
+This repository is a collection of **small automation tools that make Windows administration easier** — nothing more, nothing less.
