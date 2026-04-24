@@ -18,7 +18,7 @@ Do not use on systems or networks you do not own or have explicit permission to 
 
 ---
 
-# 🚀 Features
+## 🚀 Features
 
 - Fast TCP port scanning (no external dependencies)
 - Subnet support (`/24`, `/16`)
@@ -30,11 +30,10 @@ Do not use on systems or networks you do not own or have explicit permission to 
 
 ---
 
-# 📦 Installation
+## 📦 Installation
 
 Clone the repository:
 
-```bash
 git clone https://github.com/madoak/Powershell.git
 cd Powershell
 
@@ -48,7 +47,7 @@ Or run directly:
 
 ---
 
-# 🔧 Usage
+## 🔧 Usage
 
 Basic scan
 Invoke-NmapLight -Target 192.168.1.10 -Profile Balanced
@@ -69,7 +68,7 @@ OPEN 192.168.1.10:443 [HTTP] Apache
 
 ---
 
-# 📁 Export results
+## 📁 Export results
 
 JSON (SOC / SIEM ingestion)
 Invoke-NmapLight -Target 192.168.1.0/24 -Profile Balanced -ExportPath results.json -Format JSON
@@ -78,7 +77,7 @@ Invoke-NmapLight -Target 192.168.1.0/24 -Profile Balanced -ExportPath results.cs
 
 ---
 
-# 🧠 Scan Profiles
+## 🧠 Scan Profiles
 
 Profile	Description
 Fast	Minimal ports, quick scan
@@ -88,7 +87,7 @@ Audit	Deep scan (1–1024 ports)
 
 ---
 
-#🔌 Plugin System
+##🔌 Plugin System
 
 PSNmapLight supports simple service detection plugins.
 
@@ -106,7 +105,7 @@ OPEN / Unknown
 
 ---
 
-# 🏗 Architecture
+## 🏗 Architecture
 
 Current design:
 
@@ -124,7 +123,7 @@ predictability for SOC use cases
 
 ---
 
-# 📈 Performance Notes
+## 📈 Performance Notes
 
 Optimized for accuracy and stability
 No dropped ports due to concurrency issues
@@ -133,7 +132,7 @@ Can scale to /24 networks reliably
 
 ---
 
-# 🔐 Security Considerations
+## 🔐 Security Considerations
 
 Does not require admin rights (except where network policies restrict TCP)
 No packet injection (TCP connect only)
@@ -142,7 +141,7 @@ May trigger IDS/EDR alerts depending on profile
 
 ---
 
-# 🧪 Example SOC use cases
+## 🧪 Example SOC use cases
 
 Asset discovery validation
 Shadow IT detection
@@ -151,7 +150,7 @@ Rapid port validation during incident response
 
 ---
 
-# 📌 Roadmap (optional future enhancements)
+## 📌 Roadmap (optional future enhancements)
 
 Advanced banner fingerprinting
 TLS certificate inspection plugin
@@ -161,7 +160,7 @@ Nmap-compatible output format
 
 ---
 
-# 👤 Author
+## 👤 Author
 
 Created as part of a PowerShell security tooling set:
 “Random PowerShell scripts to make your life easier”
